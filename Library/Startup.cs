@@ -23,7 +23,7 @@ namespace Library
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        // adds services
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<CookiePolicyOptions>(options =>
@@ -38,8 +38,9 @@ namespace Library
 
             services.AddDbContext<LibraryContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LibraryConnection")));
         }
+        
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        // this method does routing/middleware 'request pipeline'
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -56,6 +57,7 @@ namespace Library
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            // thats a route
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -22,6 +22,6 @@ namespace Library
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
-                .UseStartup<Startup>();
+                .UseStartup<Startup>(); // this is just a fancy wording here.. idk why it can't be in main.
     }
 }

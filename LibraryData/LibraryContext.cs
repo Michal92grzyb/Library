@@ -5,6 +5,7 @@ namespace LibraryData
 {
     public class LibraryContext : DbContext
     {
+        // Entity Framework class. Needs to be to do the mapping
         public LibraryContext(DbContextOptions options) : base(options)
         {
 
@@ -21,5 +22,12 @@ namespace LibraryData
         public DbSet<Status> Statuses { get; set; }
         public DbSet<LibraryAsset> LibraryAssets { get; set; }
         public DbSet<Hold> Holds { get; set; }
+
+
+        // entity frameworc package manager console commands to manipulate migrations:
+        // add-migration "migrationName"
+        // update-database
+
+        // datebase code-first style.
     }
 }

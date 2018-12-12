@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace LibraryServices
 {
-    public class LibraryAssetsService : ILibraryAsset
+    public class LibraryAssetsService : ILibraryAsset // for each LibraryContext one service?
     {
         private LibraryContext _context;
 
@@ -73,9 +73,6 @@ namespace LibraryServices
         public string GetAuthorOrDirector(int id)
         {
             var isBook = _context.LibraryAssets.OfType<Book>()
-                    .Where(asset => asset.Id == id).Any();
-
-            var isVideo = _context.LibraryAssets.OfType<Video>()
                     .Where(asset => asset.Id == id).Any();
 
             return isBook ?

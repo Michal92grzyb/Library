@@ -5,8 +5,8 @@ using System.Text;
 
 namespace LibraryData
 {
-    public interface ILibraryAsset
-    {
+    public interface ILibraryAsset // this is used for LibraryAssetsService
+    { 
         IEnumerable<LibraryAsset> GetAll();
         LibraryAsset GetById(int id);
 
