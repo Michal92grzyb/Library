@@ -11,10 +11,12 @@ namespace Library.Controllers
     public class CatalogController : Controller
     {
         private ILibraryAsset _assets;
+        private ICheckout _checkouts;
 
-        public CatalogController(ILibraryAsset assets)
+        public CatalogController(ILibraryAsset assets, ICheckout checkouts)
         {
             _assets = assets;
+            _checkouts = checkouts;
         }
 
         public IActionResult Index()
@@ -39,11 +41,35 @@ namespace Library.Controllers
             return View(model);
         }
 
-        //public IActionResult Detail(int id)
-        //{
-        //    var asset = _assets.GetById(id);
+        public IActionResult Detail(int id)
+        {
+            var asset = _assets.GetById(id);
 
+            var currentHolds = _checkouts.GetCurrentHolds(id).Select(a => new AssetHoldModel
+            {
+                HoldPlaced = _checkouts.GetCurrentHoldPlaced(a.Id),
+                PatronName = _checkouts.GetCurrentHoldPatron(a.Id)
+            });
 
-        //}
+            var model = new AssetDetailModel
+            {
+                AssetId = id,
+                Title = asset.Title,
+                Year = asset.Year,
+                Cost = asset.Cost,
+                Status = asset.Status.Name,
+                ImageUrl = asset.ImageUrl,
+                AuthorOrDirector = _assets.GetAuthorOrDirector(id),
+                CurrentLocation = _assets.GetCurrentLocation(id).Name,
+                DeweyCallNumber = _assets.GetDeveyIndex(id),
+                CheckoutHistory = _checkouts.GetCheckoutHistory(id),
+                ISBN = _assets.GetIsbn(id),
+                LastestCheckout = _checkouts.GetLatestCheckout(id),
+                PatronName = _checkouts.GetCurrentPatron(id),
+                CurrentHolds = currentHolds
+            };
+
+            return View(model);
+        }
     }
 }

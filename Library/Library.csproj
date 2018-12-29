@@ -16,4 +16,8 @@
     <ProjectReference Include="..\LibraryServices\LibraryServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Checkout\" />
+  </ItemGroup>
+
 </Project>
