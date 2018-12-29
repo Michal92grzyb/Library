@@ -180,6 +180,7 @@ namespace LibraryServices
             if (currentHolds.Any())
             {
                 CheckoutToEarliestHold(id, currentHolds);
+                _context.SaveChanges();
                 return;
             }
 
